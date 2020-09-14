@@ -29,9 +29,9 @@ router.get("/api/workouts", (req, res) => {
 
     router.put("/api/workouts/:id", (req, res) => {
         console.log("req body: ", req.body);
-        Workout.updateOne({_id: req.params.id }, {exercises : req.body} 
+        Workout.updateOne({_id: req.params.id }, {$push: {"exercises" : req.body}}, 
             // runValidators will ensure new exercises meet our schema reqs.
-            // { new: true, runValidators: true }
+            { new: true, runValidators: true }
         ).then(dbWorkouts => {
             res.json(dbWorkouts);
         }).catch(err => {
