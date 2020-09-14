@@ -21,7 +21,6 @@ const workoutSchema = new Schema({
             },
             duration: {
                 type: Number,
-                required: "Please enter an amount",
             },
             weight: {
                 type: Number,
@@ -50,7 +49,7 @@ const workoutSchema = new Schema({
 // add a dynamically created propety to schema
 workoutSchema.virtual("totalDuration").get(function () {
     // "reduce" array of exercises down to just the sum of their durations
-    return this.exercise.reduce((total, exercise) => {
+    return this.exercises.reduce((total, exercise) => {
         return total + exercise.duration;
     }, 0);
 });
