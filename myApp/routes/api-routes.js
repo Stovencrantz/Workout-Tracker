@@ -36,7 +36,35 @@ router.get("/api/workouts", (req, res) => {
             res.json(dbWorkouts);
         }).catch(err => {
             res.status(400).json()
+        });
+    });
+
+    router.get("/api/workouts/range", (req, res) => {
+        //find all workouts then limit with range
+        console.log("/api/workouts/range req.body: ", req.body);
+        var date =  new Date();
+        var weekAgo = date;
+        console.log("Date now: ", date.toLocaleDateString());
+        weekAgo.setDate(date.getDate()-7);
+        console.log("Week ago: ",  weekAgo.toLocaleDateString());
+        console.log(date);
+        console.log(weekAgo);
+
+        Workout.find({ day: { $gte: weekAgo.toLocaleDateString()  }})
+        .then((response) => {
+            console.log("Data from /workouts/range: ", response);
+          res.json(response);
         })
+        .catch((err) => {
+          console.log("error: ", err);
+          res.status(400).json(err);
+        });
+        
+        
+    })
+
+    router.delete("api/workouts", ({ body }, res) => {
+        //delete all workouts
     })
 
 
