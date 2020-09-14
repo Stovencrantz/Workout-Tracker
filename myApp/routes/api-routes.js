@@ -63,9 +63,9 @@ router.get("/api/workouts", (req, res) => {
         
     })
 
-    router.delete("api/workouts", ({ body }, res) => {
-        //delete all workouts
-    })
+    // router.delete("api/workouts", ({ body }, res) => {
+    //     //delete all workouts
+    // })
 
 
 
